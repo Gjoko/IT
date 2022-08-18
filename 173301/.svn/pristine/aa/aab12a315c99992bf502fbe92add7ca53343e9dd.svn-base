@@ -1,0 +1,38 @@
+package edu.finki.gjoko.application.controllers;
+
+import edu.finki.gjoko.application.dto.Calculator;
+import edu.finki.gjoko.application.dto.Date;
+import edu.finki.gjoko.application.services.CalculatorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.io.IOException;
+
+@Controller
+public class CalculatorController {
+
+    private final CalculatorService calculatorService;
+
+    public CalculatorController(CalculatorService calculatorService) {
+        this.calculatorService = calculatorService;
+    }
+
+    @GetMapping(value = "/calculator")
+    public String getMapping(@ModelAttribute Calculator calculator, Model model) {
+        return "calculator";
+    }
+
+    @PostMapping(value = "/calculator")
+    public String postMapping(@ModelAttribute Calculator calculator,
+                              Model model) throws IOException {
+
+        String result = calculatorService.fetchResult(calculator);
+        model.addAttribute("result", result);
+        return "calculator";
+    }
+}

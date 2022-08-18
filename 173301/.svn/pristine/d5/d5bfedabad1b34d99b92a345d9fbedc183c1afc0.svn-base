@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<script type="application/javascript">
+    function clearForm() {
+        console.log("clear");
+        document.getElementById("date_form").reset();
+    }
+</script>
+
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        username: <span th:text="*{username}"></span>
+        role: <span th:text="*{role}"></span>
+    </a>
+</nav>
+
+<form th:action="@{/date}" th:object="${calculator}" method="post" id="date_form">
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" th:field="*{type}" id="cgi" value="cgi">
+        <label class="form-check-label" for="cgi">cgi</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" th:field="*{type}" id="java" value="java">
+        <label class="form-check-label" for="java">java</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" th:field="*{type}" id="dotnet" value="dotnet">
+        <label class="form-check-label" for="dotnet">dotnet</label>
+    </div>
+    <div class="col-md-6 form-group">
+        <label>Operand1</label>
+        <input type="text" class="form-control" th:field="*{operand1}">
+    </div>
+    <div class="col-md-6 form-group">
+        <label>Operand2</label>
+        <input type="text" class="form-control" th:field="*{operand2}">
+    </div>
+    <div class="col-md-6 form-group">
+        <label>Operation</label>
+        <input type="text" class="form-control" th:field="*{operation}">
+    </div>
+    <input class="btn btn-primary" type="submit" value="Submit" />
+    <input class="btn btn-primary" type="button" onclick="clearForm()" value="Clear" />
+</form>
+<span style="margin-top: 25px;">Result:</span></br>
+<span th:text="*{result}"></span>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+﻿@page "/"
+@model zad3.Pages.servicesModel
+@{}
+<html>
+<head>
+    <title>zad3</title>
+</head>
+<body>
+    <a href="/date">/date</a><br>
+    <a href="/guess_number">/guess_number</a>
+    <form method="post" action="/guess_number">
+        <input type="number" name="operand">
+        <input type="submit">
+    </form>
+</body>
+</html>

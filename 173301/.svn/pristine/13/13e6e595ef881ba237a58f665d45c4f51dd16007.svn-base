@@ -1,0 +1,33 @@
+package edu.finki.gjoko.application.services;
+
+import edu.finki.gjoko.application.dto.Date;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+
+@Service
+public class DateService {
+    public String fetchDate(Date date) throws IOException {
+        String url = "";
+        switch(date.getType()) {
+            case "cgi":
+                url = "http://localhost:8081/date.cgi";
+                break;
+            case "java":
+                url = "http://localhost:8082/services/date";
+                break;
+            case "dotnet":
+                url = "http://localhost:8083/date";
+            default:
+                break;
+        }
+
+        if(!url.isBlank() && !date.getTime().isBlank()) {
+            url += ( "?time=" + date.getTime() );
+        }
+         Document document = Jsoup.connect(url).get();
+         return document.select("body").text();
+    }
+}

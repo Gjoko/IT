@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zad1</title>
+</head>
+<body>
+
+    <a href="date.cgi">Date</a>
+    <br>
+    <a href="guess_number.cgi">Guess number</a>
+
+    <h2>Submit the form to the CGI example written in Java</h2>
+    <form id="myForm" method="post" action="guess_number.cgi">
+        <input type="text" name="operand1">
+    </form>
+    <input type="submit" form="myForm" name="submit" value="Isprati">
+</body>
+</html>

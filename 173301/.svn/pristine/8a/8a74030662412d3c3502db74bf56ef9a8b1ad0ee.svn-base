@@ -1,0 +1,37 @@
+package edu.finki.gjoko.application.services;
+
+import edu.finki.gjoko.application.dto.Calculator;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+
+@Service
+public class CalculatorService {
+
+    public String fetchResult(Calculator calculator) throws IOException {
+        String url = "";
+        switch(calculator.getType()) {
+            case "cgi":
+                url = "http://localhost:8081/calculator.cgi";
+                break;
+            case "java":
+                url = "http://localhost:8082/services/calculator";
+                break;
+            case "dotnet":
+                url = "http://localhost:8083/services/calculator";
+            default:
+                break;
+        }
+        if(!url.isBlank() && !calculator.getOperand1().isBlank() && !calculator.getOperand2().isBlank() &&
+        !calculator.getOperation().isBlank()) {
+            url += ( "?operand1=" + calculator.getOperand1() +
+                    "&operand2=" + calculator.getOperand2() +
+                    "&operation=" + calculator.getOperation());
+        }
+
+        Document document = Jsoup.connect(url).get();
+        return document.select("body").text();
+    }
+}

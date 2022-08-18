@@ -1,0 +1,38 @@
+﻿@page "/guess_number"
+@model zad3.Pages.guessNumberModel
+@{
+    int result = Model.result;
+    bool isValid = Model.isValid;
+}
+<html>
+    <head>
+        <title>Guess number</title>
+    </head>
+    
+    @if(isValid)
+    {   
+        @if(result == 0) 
+        {
+            <body>
+                You guessed correctly!
+            </body>
+        }
+        @if(result < 0) 
+        {
+            <body>
+                Your guess is incorrect. The number I imagined is higher
+            </body>
+        }
+        @if(result > 0) {
+            <body>
+                Your guess is incorrect. The number I imagined is lower.
+            </body>
+        }
+    } else
+    {
+        <body>
+            INVALID OPERАTION - the guess_number service expects a GET or POST parameter operand1 with an integer value and will output if you guessed the imagined number correctly or will output that your guess was higher or lower than the imagined number
+        </body>
+    }
+    
+</html>
